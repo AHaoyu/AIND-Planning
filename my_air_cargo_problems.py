@@ -129,6 +129,7 @@ class AirCargoProblem(Problem):
         kb = PropKB()
         kb.tell(state.pos_sentence())
         for action in self.actions_list:
+<<<<<<< HEAD
             is_possible = True
             for clause in action.precond_pos:
                 if clause not in kb.clauses:
@@ -142,6 +143,9 @@ class AirCargoProblem(Problem):
                     break
             if is_possible:
                 possible_actions.append(action)
+=======
+            
+>>>>>>> ecb01cb9926059f478aa11cd9348425ece12168b
         return possible_actions
 
     def result(self, state: str, action: Action):
