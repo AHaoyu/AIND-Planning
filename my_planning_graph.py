@@ -196,7 +196,7 @@ def mutexify(node1: PgNode, node2: PgNode):
 class PlanningGraph():
     """
     A planning graph as described in chapter 10 of the AIMA text. The planning
-    graph can be used to reason about 
+    graph can be used to reason about
     """
 
     def __init__(self, problem: Problem, state: str, serial_planning=True):
@@ -306,6 +306,17 @@ class PlanningGraph():
         #   set iff all prerequisite literals for the action hold in S0.  This can be accomplished by testing
         #   to see if a proposed PgNode_a has prenodes that are a subset of the previous S level.  Once an
         #   action node is added, it MUST be connected to the S node instances in the appropriate s_level set.
+        #for s_node in self.s_levels[level]:
+        self.a_levels.append(set())
+        for action in self.all_actions:
+            #for s_node in self.s_levels[level]:
+                #if action.precond_pos == s_node.symbol or action.precond_neg == s_node.symbol:
+                    #self.a_levels[level].add(PgNode_a(action))
+            P_nodes = PgNode_a(action).precond_s_nodes()
+            if P_nodes.issubset(self.s_levels[level]):
+                self.a_levels[level].add(PgNode_a(action))
+
+
 
     def add_literal_level(self, level):
         """ add an S (literal) level to the Planning Graph
@@ -386,7 +397,7 @@ class PlanningGraph():
 
     def interference_mutex(self, node_a1: PgNode_a, node_a2: PgNode_a) -> bool:
         """
-        Test a pair of actions for mutual exclusion, returning True if the 
+        Test a pair of actions for mutual exclusion, returning True if the
         effect of one action is the negation of a precondition of the other.
 
         HINT: The Action instance associated with an action node is accessible
