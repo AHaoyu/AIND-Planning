@@ -129,7 +129,6 @@ class AirCargoProblem(Problem):
         kb = PropKB()
         kb.tell(state.pos_sentence())
         for action in self.actions_list:
-<<<<<<< HEAD
             is_possible = True
             for clause in action.precond_pos:
                 if clause not in kb.clauses:
@@ -143,9 +142,6 @@ class AirCargoProblem(Problem):
                     break
             if is_possible:
                 possible_actions.append(action)
-=======
-            
->>>>>>> ecb01cb9926059f478aa11cd9348425ece12168b
         return possible_actions
 
     def result(self, state: str, action: Action):
@@ -174,7 +170,7 @@ class AirCargoProblem(Problem):
                 new_state.neg.append(fluent)
         return encode_state(new_state, self.state_map)
 
-    def goal_test(self, state: str) -> bool:
+    def goal_test(self, state: str) -> bool
         """ Test the state to see if goal is reached
 
         :param state: str representing state
@@ -199,7 +195,7 @@ class AirCargoProblem(Problem):
         out from the current state in order to satisfy each individual goal
         condition.
         """
-        # requires implemented PlanningGraph class
+        # requires implemented PlanningGraph class1
         pg = PlanningGraph(self, node.state)
         pg_levelsum = pg.h_levelsum()
         return pg_levelsum
@@ -213,6 +209,15 @@ class AirCargoProblem(Problem):
         """
         # TODO implement (see Russell-Norvig Ed-3 10.2.3  or Russell-Norvig Ed-2 11.2)
         count = 0
+        currentState = decode_state(node.state, self.state_map)
+        kb = PropKB()
+        kb.tell(currentState.pos_sentence())
+        # Because every action has only one positive effect, and based on the subgoal independence
+        # assumption, the minimum number of actions is the number of unsatisfied goals, which is the
+        # heuristic value we can get here:
+        for clause in self.goal:
+            if clause not in kb.clauses:
+                count += 1
         return count
 
 
