@@ -312,7 +312,7 @@ class PlanningGraph():
                 #if action.precond_pos == s_node.symbol or action.precond_neg == s_node.symbol:
                     #self.a_levels[level].add(PgNode_a(action))
             A_node = PgNode_a(action)
-            S_nodes = A_node.prenodes()
+            S_nodes = A_node.prenodes
             if S_nodes.issubset(self.s_levels[level]):
                 for S_node in S_nodes:
                     A_node.parents.add(S_node)
@@ -532,6 +532,7 @@ class PlanningGraph():
             for level_set in self.s_levels:
                 if G_node in level_set:
                     level_cost = self.s_levels.index(level_set)
-                break
+                    break
             level_sum += level_cost
         return level_sum
+        

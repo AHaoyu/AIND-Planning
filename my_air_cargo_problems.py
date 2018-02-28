@@ -64,7 +64,7 @@ class AirCargoProblem(Problem):
                 for p in self.planes:
                     for c in self.cargos:
                         precond_pos = [expr("At({}, {})".format(p, a)),expr("At({}, {})".format(c, a))]
-                        precon_neg = []
+                        precond_neg = []
                         effect_add = [expr("In({}, {})".format(c, p))]
                         effect_rem = [expr("At({}, {})".format(c, a))]
                         load = Action(expr("Load({}, {}, {})".format(c, p, a)),
@@ -83,7 +83,7 @@ class AirCargoProblem(Problem):
                 for p in self.planes:
                     for c in self.cargos:
                         precond_pos = [expr("At({}, {})".format(p, a)),expr("In({}, {})".format(c, p))]
-                        precon_neg = []
+                        precond_neg = []
                         effect_add = [expr("At({}, {})".format(c, a))]
                         effect_rem = [expr("In({}, {})".format(c, p))]
                         unload = Action(expr("Unload({}, {}, {})".format(c, p, a)),
@@ -319,7 +319,11 @@ def air_cargo_p3() -> AirCargoProblem:
            expr('In(C4, P1)'),
            expr('In(C4, P2)'),
            expr('At(P1, JFK)'),
+           expr('At(P1, ATL)'),
+           expr('At(P1, ORD)'),
            expr('At(P2, SFO)'),
+           expr('At(P2, ATL)'),
+           expr('At(P2, ORD)'),
           ]
     init = FluentState(pos, neg)
     goal = [expr('At(C1, JFK)'),
